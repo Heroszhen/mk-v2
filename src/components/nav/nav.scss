@@ -1,0 +1,47 @@
+@import '../../styles/utils.scss';
+
+$navWidth: 260px;
+
+#nav {
+    position: fixed;
+    z-index: 500;
+    width: $navWidth;
+    height: 100vh;
+    top: 0;
+    right: -$navWidth;
+    background-color: white;
+    overflow: hidden;
+    &.open{
+        animation: show_nav .3s linear;
+        animation-fill-mode:forwards;
+    }
+    >.item {
+        background-color: white;
+        padding: 5px 15px;
+        border-bottom : 1px solid rgb(19, 19, 19);
+        height: 42px;
+        @include flex(end, center);
+    }
+    #wrap-close-nav {
+        font-size:25px;
+        text-align: right;
+    }
+    .route{
+        cursor: pointer;
+        width: 100%;
+        text-decoration: none;
+        color: black;
+        display: block;
+        transition: .5s;
+        @include flex(start);
+        &:hover{
+            background-color: black;
+            color: white;
+        }
+    }
+}
+
+@keyframes show_nav {
+    0% { right:-$navWidth; }
+    100% {  right:0px  }
+}

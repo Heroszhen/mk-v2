@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bungee+Tint&family=Instrument+Serif:ital@0;1&display=swap');
+
+@import './styles/variables.scss';
+
+* {
+    font-family: "Instrument Serif", serif;
+    font-style: normal;
+    background-color: #f6f9f1;
+}
+
+:root {
+    --main-bg-color: #eaf1e5;
+    --main-text-color: #4a4b49;
+}
+
+
+.btn-vouge {
+    display: block;
+    padding: 8px 30px;
+    background-color: $mainBgColor;
+    color: $mainTextColor;
+    font-family: Outfit, sans-serif;
+    border:2px solid $mainBgColor;
+    font-size: 15px;
+    animation: change_bg_color2 .2s normal forwards ease-in-out;
+    box-shadow: 0 0 2px 3px rgba(34, 33, 33, 0.07);
+}
+
+.btn-vouge:hover {
+    background-color: var(--main-text-color);
+    color: var(--main-bg-color);
+    animation: change_bg_color .2s ease-in-out;
+}
+
+.btn-vouge:active {
+    box-shadow: none;
+}
+
+@keyframes change_bg_color {
+    0% { background-image: linear-gradient(45deg, var(--main-text-color) 1%, var(--main-bg-color) 1%) !important; }
+    10% { background-image: linear-gradient(45deg, var(--main-text-color) 10%, var(--main-bg-color) 1%) !important; }
+    20% { background-image: linear-gradient(45deg, var(--main-text-color) 20%, var(--main-bg-color) 1%) !important; }
+    40% { background-image: linear-gradient(45deg, var(--main-text-color) 40%, var(--main-bg-color) 1%) !important; }
+    50% { background-image: linear-gradient(45deg, var(--main-text-color) 50%, var(--main-bg-color) 1%) !important; }
+    60% { background-image: linear-gradient(45deg, var(--main-text-color) 60%, var(--main-bg-color) 1%) !important; }
+    70% { background-image: linear-gradient(45deg, var(--main-text-color) 70%, var(--main-bg-color) 1%) !important; }
+    80% { background-image: linear-gradient(45deg, var(--main-text-color) 80%, var(--main-bg-color) 1%) !important; }
+    100% {  background-image: linear-gradient(45deg, var(--main-text-color) 100%, var(--main-bg-color) 1%) !important;  }
+}
+
+@keyframes change_bg_color2 {
+    0% { background-image: linear-gradient(225deg, var(--main-bg-color) 1%, var(--main-text-color) 1%) !important; }
+    10% { background-image: linear-gradient(225deg, var(--main-bg-color) 10%, var(--main-text-color) 1%) !important; }
+    20% { background-image: linear-gradient(225deg, var(--main-bg-color) 20%, var(--main-text-color) 1%) !important; }
+    40% { background-image: linear-gradient(225deg, var(--main-bg-color) 40%, var(--main-text-color) 1%) !important; }
+    50% { background-image: linear-gradient(225deg, var(--main-bg-color) 50%, var(--main-text-color) 1%) !important; }
+    60% { background-image: linear-gradient(225deg, var(--main-bg-color) 60%, var(--main-text-color) 1%) !important; }
+    70% { background-image: linear-gradient(225deg, var(--main-bg-color) 70%, var(--main-text-color) 1%) !important; }
+    80% { background-image: linear-gradient(225deg, var(--main-bg-color) 80%, var(--main-text-color) 1%) !important; }
+    100% {  background-image: linear-gradient(225deg, var(--main-bg-color) 100%, var(--main-text-color) 1%) !important;  }
+}
+
+/* background-image: linear-gradient(45deg, var(--wdtPrimaryColor) 50%, var(--wdtTertiaryColor) 50%) !important;
+background-image: linear-gradient(45deg, var(--main-text-color) 100%, var(--main-bg-color) 100%) !important; */
+
+
+.pointer {
+    cursor: pointer;
+}
