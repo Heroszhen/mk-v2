@@ -1,12 +1,14 @@
 import {create} from "zustand";
+import { getRequestHeaders } from "../services/utils";
 
 const useHomeStore = create((set, get) => ({
     photos: [[],[],[]],
+    videos: [],
     getPhotos: () => {
         for (let i = 0; i <= 2; i++) {
             if (get().photos[i].length === 0) {
                 fetch(`${import.meta.env.VITE_API_URL}/mk/photos_by_page?page=${i + 1}`, {
-                    headers: {'X-Requested-With': 'XMLHttpRequest'}
+                    headers: getRequestHeaders()
                 })
                 .then(response => response.json())
                 .then(response => {
@@ -17,5 +19,16 @@ const useHomeStore = create((set, get) => ({
             } 
         }
     },
+    getVideos: () => {
+        if (get().videos.length === 0) {
+            fetch(`${import.meta.env.VITE_API_URL}/mk/videos/new?result=6`, {
+                headers: getRequestHeaders()
+            })
+            .then(response => response.json())
+            .then(response => {
+                set((state) => ({videos: response.data}))
+            });
+        } 
+    }
 }));
 export default useHomeStore;

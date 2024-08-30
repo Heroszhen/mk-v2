@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './home.scss';
 import useHomeStore from '../../store/homeStore';
+import Photo from '../../components/photo/photo';
 
 const Home = (props) => {
-    const {getPhotos, photos} = useHomeStore();
+    const {getPhotos, photos, getVideos, videos} = useHomeStore();
     const listRef = useRef([]);
+    const [photoUrl, setPhotoUrl] = useState(null);
     
     useEffect(() => {
         getPhotos();
+        getVideos();
         let localTimer2 = null;
         let localTimer = window.setInterval(() => {
             if (photos[0].length > 0 && photos[1].length > 0 && photos[2].length > 0) {
@@ -50,8 +53,8 @@ const Home = (props) => {
                                 {
                                     photos[n].reverse().map((photo, key2) => {
                                         return (
-                                            <div key={key2} className="wrap-photo">
-                                                <img src={photo['photourl']} alt=""/>
+                                            <div key={key2} className="wrap-photo" onClick={() => setPhotoUrl(photo['photourl'])}>
+                                                <img src={photo['photourl']} alt="" />
                                                 <div className='actress-name'>
                                                     {photo.name !== null
                                                         ? photo.name
@@ -67,9 +70,30 @@ const Home = (props) => {
                     })
                 }
             </section>
-            <section id="part2">
-
+            <section id="part2" className='pt-5 pb-5'>
+                <div className='container'>
+                    <div className='row'>
+                        {
+                            videos.map((video, key) => {
+                                return (
+                                    <div className='col-6 col-md-4 mb-5 pointer' key={key}>
+                                        <div className='wrap-video'>
+                                            <div>
+                                                <img src={video.photourl} alt="" />
+                                            </div>
+                                            <div className='fw-bold'>{video.name}</div>
+                                            <div className='small'>{video.actressname}</div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
             </section>
+            {photoUrl !== null &&
+                <Photo photoUrl={photoUrl} setPhotoUrl={setPhotoUrl} />
+            }
         </section>
     )
 }
