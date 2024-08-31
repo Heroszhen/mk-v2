@@ -9,8 +9,11 @@
     left: 0;
     background-color: black;
     @include flex(center, center);
-    img {
-        width: auto;
-        height: 99%;
+    .magnifier {
+        
+        img {
+            width: auto;
+            height: 99%;
+        }
     }
 }

@@ -11,10 +11,6 @@ import Nav from './components/nav/Nav.jsx';
 function App() {
   const navRef = useRef(null);
 
-  const toogleNav = () => {
-    console.log()
-  }
-
   return (
     <>
       <div id="wrap-btn-nav" className='pointer bg-transparent'>
