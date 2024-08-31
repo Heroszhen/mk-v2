@@ -41,6 +41,8 @@
         }
     }
     #part2 {
+        margin-top: 50px;
+        margin-bottom: 50px;
         .wrap-video {
             width: 70%;
             margin: 0 auto;
@@ -59,8 +61,13 @@
 }
 
 @media (max-width: 767px) {
-    .list-photos {
-        width: 25% !important;
+    #part1 {
+        @include flex(start !important, center);
+        .list-photos {
+            width: 25% !important;
+            margin-left: 20px !important;
+            margin-right: 0 !important;
+        }
     }
     .wrap-video {
         width: 100% !important;

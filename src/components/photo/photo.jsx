@@ -14,10 +14,9 @@ const Photo = (props) => {
     }, []);
 
     return (
-        <section id="big-photo">
-            <Magnifier src={props.photoUrl} width={width} height={height} onDoubleClick={() => props.setPhotoUrl(null)} />;
+        <section id="big-photo" onDoubleClick={() => props.setPhotoUrl(null)}>
+            <Magnifier src={props.photoUrl} width={width} height={height} />;
         </section>
     );
 }
-
 export default Photo;

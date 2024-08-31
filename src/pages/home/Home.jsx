@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './home.scss';
 import useHomeStore from '../../store/homeStore';
-import Photo from '../../components/photo/photo';
+import Video from '../../components/video/Video';
+import Photo from '../../components/photo/Photo';
 
 const Home = (props) => {
     const {getPhotos, photos, getVideos, videos} = useHomeStore();
     const listRef = useRef([]);
     const [photoUrl, setPhotoUrl] = useState(null);
+    const [videoId, setVideoId] = useState(null);
     
     useEffect(() => {
         getPhotos();
@@ -44,57 +46,66 @@ const Home = (props) => {
     }
     
     return (
-        <section id="home">
-            <section id="part1">
-                {
-                    [0, 1, 2].map((n, key) => {
-                        return (
-                            <section className="list-photos" key={key} ref={(el) => (listRef.current[key] = el)} >
-                                {
-                                    photos[n].reverse().map((photo, key2) => {
-                                        return (
-                                            <div key={key2} className="wrap-photo" onClick={() => setPhotoUrl(photo['photourl'])}>
-                                                <img src={photo['photourl']} alt="" />
-                                                <div className='actress-name'>
-                                                    {photo.name !== null
-                                                        ? photo.name
-                                                        : photo.actress.name
-                                                    }
+        <>
+            <section id="home">
+                <section id="part1">
+                    {
+                        [0, 1, 2].map((n, key) => {
+                            return (
+                                <section className="list-photos" key={key} ref={(el) => (listRef.current[key] = el)} >
+                                    {
+                                        photos[n].reverse().map((photo, key2) => {
+                                            return (
+                                                <div key={key2} className="wrap-photo" onClick={() => setPhotoUrl(photo['photourl'])}>
+                                                    <img src={photo['photourl']} alt="" />
+                                                    <div className='actress-name'>
+                                                        {photo.name !== null
+                                                            ? photo.name
+                                                            : photo.actress.name
+                                                        }
+                                                    </div>
                                                 </div>
+                                            );
+                                        })
+                                    }
+                                </section>
+                            )
+                        })
+                    }
+                </section>
+                <section id="part2">
+                    <div className='container'>
+                        <div className='row'>
+                            {
+                                videos.map((video, key) => {
+                                    return (
+                                        <div className='col-6 col-md-4 mb-5 pointer' key={key}>
+                                            <div className='wrap-video'>
+                                                <div>
+                                                    <img src={video.photourl} alt="" />
+                                                </div>
+                                                <div className='fw-bold'>{video.name}</div>
+                                                <div className='small'>{video.actressname}</div>
                                             </div>
-                                        );
-                                    })
-                                }
-                            </section>
-                        )
-                    })
-                }
-            </section>
-            <section id="part2" className='pt-5 pb-5'>
-                <div className='container'>
-                    <div className='row'>
-                        {
-                            videos.map((video, key) => {
-                                return (
-                                    <div className='col-6 col-md-4 mb-5 pointer' key={key}>
-                                        <div className='wrap-video'>
-                                            <div>
-                                                <img src={video.photourl} alt="" />
-                                            </div>
-                                            <div className='fw-bold'>{video.name}</div>
-                                            <div className='small'>{video.actressname}</div>
                                         </div>
-                                    </div>
-                                )
-                            })
-                        }
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
-                </div>
+                </section>
             </section>
             {photoUrl !== null &&
-                <Photo photoUrl={photoUrl} setPhotoUrl={setPhotoUrl} />
+                <section className="wrap-component">
+                    <Photo photoUrl={photoUrl} setPhotoUrl={setPhotoUrl} />
+                </section> 
             }
-        </section>
+            {videoId !== null &&
+                <section className="wrap-component">
+                    <Video videoId={videoId} setVideoId={setVideoId} />
+                </section>
+            }
+        </>
     )
 }
 export default Home;
