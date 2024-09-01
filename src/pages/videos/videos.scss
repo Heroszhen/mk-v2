@@ -2,5 +2,14 @@
 @import '../../styles/utils.scss';
 
 #videos {
-    
+    article {
+        margin-bottom: 50px;
+        .wrap {
+            width: 95%;
+            margin: 0 auto;
+            color: black;
+            padding: 20px;
+            background-color: white;
+        }
+    }
 }
