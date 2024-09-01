@@ -5,12 +5,24 @@
 * {
     font-family: "Instrument Serif", serif;
     font-style: normal;
+    // background-color: #f6f9f1;
+}
+
+[data-page="main"] {
     background-color: #f6f9f1;
+    min-height: 100vh;
+    padding-bottom: 100px;
 }
 
 img {
     width: 100%;
     height: auto;
+}
+
+a {
+    display: block;
+    text-decoration: none !important;
+    color: $mainTextColor;
 }
 
 :root {
@@ -31,7 +43,7 @@ img {
     display: block;
     padding: 8px 30px;
     background-color: $mainBgColor;
-    color: $mainTextColor;
+    color: $mainTextColor !important;
     font-family: Outfit, sans-serif;
     border:2px solid $mainBgColor;
     font-size: 15px;
@@ -41,7 +53,7 @@ img {
 
 .btn-vouge:hover {
     background-color: var(--main-text-color);
-    color: var(--main-bg-color);
+    color: var(--main-bg-color) !important;
     animation: change_bg_color .2s ease-in-out;
 }
 

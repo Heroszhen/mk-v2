@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './home.scss';
 import useHomeStore from '../../store/homeStore';
-import Video from '../../components/video/Video';
 import Photo from '../../components/photo/Photo';
+import { Link } from "react-router-dom";
 
 const Home = (props) => {
     const {getPhotos, photos, getVideos, videos} = useHomeStore();
     const listRef = useRef([]);
     const [photoUrl, setPhotoUrl] = useState(null);
-    const [videoId, setVideoId] = useState(null);
     
     useEffect(() => {
         getPhotos();
@@ -47,7 +46,7 @@ const Home = (props) => {
     
     return (
         <>
-            <section id="home">
+            <section id="home" data-page="main">
                 <section id="part1">
                     {
                         [0, 1, 2].map((n, key) => {
@@ -80,13 +79,13 @@ const Home = (props) => {
                                 videos.map((video, key) => {
                                     return (
                                         <div className='col-6 col-md-4 mb-5 pointer' key={key}>
-                                            <div className='wrap-video'>
+                                            <Link to={'/video/' + video.id}  className="wrap-video">
                                                 <div>
                                                     <img src={video.photourl} alt="" />
                                                 </div>
                                                 <div className='fw-bold'>{video.name}</div>
                                                 <div className='small'>{video.actressname}</div>
-                                            </div>
+                                            </Link>
                                         </div>
                                     )
                                 })
@@ -99,11 +98,6 @@ const Home = (props) => {
                 <section className="wrap-component">
                     <Photo photoUrl={photoUrl} setPhotoUrl={setPhotoUrl} />
                 </section> 
-            }
-            {videoId !== null &&
-                <section className="wrap-component">
-                    <Video videoId={videoId} setVideoId={setVideoId} />
-                </section>
             }
         </>
     )

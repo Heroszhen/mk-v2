@@ -1,0 +1,43 @@
+@import '../../styles/variables.scss';
+
+#footer {
+    background-color: #222121;
+    color: white;
+    >section {
+        padding:20px;
+    }
+    >section:nth-child(1) {
+        position: relative;
+        height: 700px;
+        width: 100%;
+        background-image: url(https://photosofzhenblog.s3.eu-west-3.amazonaws.com/mk/66d3677ceeb3f.jpeg);
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        .link {
+            position: absolute;
+            left: 50px;
+            color: $mainTextColor;
+        }
+        @for $i from 1 through 4 {
+            .link:nth-child(#{$i}) {
+              top: $i * 60px;
+            }
+        }
+    }
+    >section:nth-child(2) {
+        border-bottom: 1px solid white;
+        text-align: center;
+        font-size: 200px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        margin-left: 40px;
+        margin-right: 40px;
+        a {
+            color: white;
+            &:hover {
+                text-decoration: underline !important;
+            }
+        }
+    }
+}

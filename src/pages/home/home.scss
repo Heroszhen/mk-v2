@@ -42,12 +42,14 @@
     }
     #part2 {
         margin-top: 50px;
-        margin-bottom: 50px;
         .wrap-video {
+            display: block;
+            text-decoration: none;
             width: 70%;
             margin: 0 auto;
             overflow: hidden;
             padding: 0 5px;
+            color: black;
             img {
                 border-radius: 15px;
                 transition: .5s;
@@ -58,6 +60,10 @@
             }
         }
     }
+}
+
+.wrap-component {
+    z-index: 110 !important;
 }
 
 @media (max-width: 767px) {
