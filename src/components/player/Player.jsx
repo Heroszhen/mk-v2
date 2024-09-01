@@ -104,6 +104,9 @@ const Player = (props) => {
                             />
                         }
                     </div>
+                    <div className='fst-italic p-2 text-black-50 text-center'>
+                        Si la vidéo ne s'affiche pas, aller sur le site d'origine
+                    </div>
                     <div className="video-title fw-bold pt-3 ps-3 pe-3 fs-4">
                         {video.name}
                     </div>
