@@ -29,9 +29,9 @@ const Videos = (props) => {
                                     <article className='col-6 col-md-4 text-center' key={key}>
                                         <Link to={'/video/' + video.id}  className="wrap text-start">
                                             <img src={video.photourl} />
-                                            <div className='fw-bold'>{video.name}</div>
+                                            <div className='fw-bold mt-2'>{video.name}</div>
                                             <div>{video.actressname}</div>
-                                            <div>{moment().format('dd/MM/YYYY')}</div>
+                                            <div>{moment().format('DD/MM/YYYY')}</div>
                                         </Link>
                                     </article>
                                 );
