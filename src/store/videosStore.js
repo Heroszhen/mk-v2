@@ -1,10 +1,11 @@
 import {create} from "zustand";
 import { getRequestHeaders } from "../services/utils";
+import env from '../assets/env.json';
 
 const useVideosStore = create((set, get) => ({
     videos: [],
     page: 1,
-    itemsByPage: 0,
+    itemsByPage: 6,
     total: 0,
     canSearch: true,
     setPage: (page) => {set((state) => ({page: page}))},
@@ -12,7 +13,7 @@ const useVideosStore = create((set, get) => ({
     searchVideos: (keywords, page) => {
         set((state) => ({canSearch: false, page: page}));
 
-        fetch(`${import.meta.env.VITE_API_URL}/mk/videos/search?key=${keywords}&page=${get().page}`, {
+        fetch(`${env.VITE_API_URL}/mk/videos/search?key=${keywords}&page=${get().page}`, {
             headers: getRequestHeaders()
         })
         .then(response => {
@@ -21,7 +22,7 @@ const useVideosStore = create((set, get) => ({
         })
         .then(response => {
             set((state) => ({
-                videos: [...get().videos, ...response.data],
+                videos: response.data,
                 itemsByPage: response.itemsByPage,
                 total: response.total,
             }));

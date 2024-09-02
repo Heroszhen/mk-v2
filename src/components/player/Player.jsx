@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import "./player.scss";
 import { getRequestHeaders } from '../../services/utils';
 import parse from 'html-react-parser';
+import moment from "moment";
+import env from '../../assets/env.json';
 
 const Player = (props) => {
     const [video, setVideo] = useState(null);
@@ -10,7 +12,7 @@ const Player = (props) => {
 
     useEffect(() => {
         let controller = new AbortController();
-        fetch(`${import.meta.env.VITE_API_URL}/mk/videos/video/${props.videoId}`, {
+        fetch(`${env.VITE_API_URL}/mk/videos/video/${props.videoId}`, {
             signal: controller.signal,
             headers: getRequestHeaders()
         })
@@ -107,11 +109,25 @@ const Player = (props) => {
                     <div className='fst-italic p-2 text-black-50 text-center'>
                         Si la vidéo ne s'affiche pas, aller sur le site d'origine
                     </div>
-                    <div className="video-title fw-bold pt-3 ps-3 pe-3 fs-4">
+                    <div className='wrap-icons'>
+                        <a href={video.siteurl} target='__blank' className="wrap" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Site d'origine">
+                            <i className="bi bi-box-arrow-right"></i>
+                        </a>
+                        <div className="wrap">
+                            <i className="bi bi-link-45deg"></i>
+                        </div>
+                        <div className="wrap">
+                            <i className="bi bi-arrow-counterclockwise"></i>
+                        </div>
+                    </div>
+                    <div className="video-title fw-bold pt-1 ps-3 pe-3 fs-4">
                         {video.name}
                     </div>
                     <div className="video-actress pt-1 ps-3 pe-3">
                         {video.actressname}
+                    </div>
+                    <div className="video-actress pt-1 ps-3 pe-3 small">
+                        {moment(video.created).format('DD/MM/YYYY')}
                     </div>
                     {video.description !==null &&
                         <div className="video-description">

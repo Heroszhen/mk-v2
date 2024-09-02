@@ -1,3 +1,6 @@
+@import '../../styles/utils.scss';
+@import '../../styles/variables.scss';
+
 #player-video {
     min-height: 100vh;
     #container-video {
@@ -22,6 +25,25 @@
             padding: 10px;
             background-color: rgba(0, 0, 0, 0.1);
             border-radius: 12px;
+        }
+        .wrap-icons {
+            @include flex(flex-start, center);
+            padding-left: 17px;
+            .wrap {
+                display: block;
+                color: $mainTextColor;
+                font-size: 20px;
+                width: 40px;
+                height: 40px;
+                @include flex(center, center);
+                &:hover {
+                    color: black;
+                    font-size: bold;
+                    cursor: pointer;
+                    background-color: $mainBgColor2;
+                    border-radius: 5px;
+                }
+            }
         }
     }
 }
