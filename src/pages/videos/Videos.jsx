@@ -8,17 +8,17 @@ import ResponsivePagination from 'react-responsive-pagination';
 import 'react-responsive-pagination/themes/classic.css';
 
 const Videos = (props) => {
-    const {videos, itemsByPage, total, page, canSearch, searchVideos} = useVideosStore();
-    const [keywords, setKeywords] = useState('');
+    const {videos, itemsByPage, total, page, searchVideos, keywordsInStore} = useVideosStore();
+    const [keywords, setKeywords] = useState(keywordsInStore);
     const [currentPage, setCurrentPage] = useState(page);
     const [enter, setEnter] = useState(true);
     
-    const searchDatas = (terms) => {
-
+    const searchDatas = (key) => {
+        searchVideos(key, 1);
     }
 
     useEffect(() => {
-        
+    
     }, []);
 
     useEffect(() => {
@@ -32,7 +32,7 @@ const Videos = (props) => {
     
     return (
         <section id="videos" data-page="main">
-            <Search setKeywords={setKeywords} searchDatas={searchDatas} />
+            <Search keywords={keywords} setKeywords={setKeywords} setCurrentPage={setCurrentPage} searchDatas={searchDatas} />
             <section className='wrap-videos pt-5'>
                 <div className="container">
                     <div className="row">

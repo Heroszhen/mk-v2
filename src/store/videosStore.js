@@ -4,6 +4,7 @@ import { getEnv } from "../services/utils";
 
 const useVideosStore = create((set, get) => ({
     videos: [],
+    keywordsInStore: '',
     page: 1,
     itemsByPage: 6,
     total: 0,
@@ -11,10 +12,15 @@ const useVideosStore = create((set, get) => ({
     abortController: null,
     setPage: (page) => {set((state) => ({page: page}))},
     resetVideos: () => {set((state) => ({videos: []}))},
-    searchVideos: async (keywords, page) => {console.log(keywords, page)
+    searchVideos: async (keywords, page) => {
         if (get().abortController !== null)get().abortController.abort;
 
-        set((state) => ({canSearch: false, page: page, abortController: new AbortController()}));
+        set((state) => ({
+            canSearch: false, 
+            page: page, 
+            abortController: new AbortController(),
+            keywordsInStore: keywords
+        }));
 
         const env = await getEnv();
         fetch(`${env.VITE_API_URL}/mk/videos/search?key=${keywords}&page=${get().page}`, {
