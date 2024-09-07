@@ -4,35 +4,37 @@ import Search from '../../components/search/Search';
 import useVideosStore from '../../store/videosStore';
 import { Link } from 'react-router-dom';
 import moment from "moment";
-import Paginator from 'react-hooks-paginator';
+import ResponsivePagination from 'react-responsive-pagination';
+import 'react-responsive-pagination/themes/classic.css';
 
 const Videos = (props) => {
     const {videos, itemsByPage, total, page, canSearch, searchVideos} = useVideosStore();
     const [keywords, setKeywords] = useState('');
-    const [offset, setOffset] = useState(0);
     const [currentPage, setCurrentPage] = useState(page);
-    const [enter, setEnter] = useState(false);
+    const [enter, setEnter] = useState(true);
     
     const searchDatas = (terms) => {
 
     }
 
     useEffect(() => {
-        if (videos.length === 0) {
-            searchVideos(keywords, currentPage);
-            setEnter(true);
-        }
+        
     }, []);
 
     useEffect(() => {
-        if (enter === true)searchVideos(keywords, currentPage);
+        if (enter === true) {
+            setEnter(false);
+            if (videos.length === 0)searchVideos(keywords, currentPage);
+        } else {
+            searchVideos(keywords, currentPage);
+        }
     }, [currentPage]);
     
     return (
         <section id="videos" data-page="main">
             <Search setKeywords={setKeywords} searchDatas={searchDatas} />
             <section className='wrap-videos pt-5'>
-                <div className="container-fluid">
+                <div className="container">
                     <div className="row">
                         {
                             videos.map((video, key) => {
@@ -51,13 +53,11 @@ const Videos = (props) => {
                     </div>
                 </div>
                 <div className='wrap-paginator'>
-                    <Paginator
-                        totalRecords={Math.ceil(total / itemsByPage)}
-                        pageLimit={4}
-                        pageNeighbours={1}
-                        setOffset={setOffset}
-                        currentPage={page}
-                        setCurrentPage={setCurrentPage}
+                    <ResponsivePagination
+                        current={currentPage}
+                        total={Math.ceil(total / itemsByPage)}
+                        onPageChange={setCurrentPage}
+                        maxWidth={'500'}
                     />
                 </div>
             </section>
