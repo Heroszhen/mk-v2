@@ -8,7 +8,7 @@ const Home = (props) => {
     const {getPhotos, photos, getVideos, videos} = useHomeStore();
     const listRef = useRef([]);
     const [photoUrl, setPhotoUrl] = useState(null);
-    
+
     useEffect(() => {
         getPhotos();
         getVideos();

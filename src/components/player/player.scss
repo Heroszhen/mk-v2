@@ -5,7 +5,7 @@
     min-height: 100vh;
     #container-video {
         .wrap-video {
-            height: 600px;
+            height: 650px;
             overflow: hidden;
             background-color: black;
             text-align: center;
@@ -17,6 +17,11 @@
                 height: 720px !important;
                 iframe {
                     width: 324px;
+                }
+            }
+            &[data-video-type="4"] {
+                iframe {
+                    height: 800px !important;
                 }
             }
         }

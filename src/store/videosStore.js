@@ -1,6 +1,6 @@
 import {create} from "zustand";
 import { getRequestHeaders } from "../services/utils";
-import env from '../assets/env.json';
+import { getEnv } from "../services/utils";
 
 const useVideosStore = create((set, get) => ({
     videos: [],
@@ -10,11 +10,12 @@ const useVideosStore = create((set, get) => ({
     canSearch: true,
     setPage: (page) => {set((state) => ({page: page}))},
     resetVideos: () => {set((state) => ({videos: []}))},
-    searchVideos: (keywords, page) => {
+    searchVideos: async (keywords, page) => {
         set((state) => ({canSearch: false, page: page}));
 
+        const env = await getEnv();
         fetch(`${env.VITE_API_URL}/mk/videos/search?key=${keywords}&page=${get().page}`, {
-            headers: getRequestHeaders()
+            headers: getRequestHeaders(env)
         })
         .then(response => {
             set((state) => ({canSearch: true}));

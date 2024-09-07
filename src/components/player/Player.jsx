@@ -3,7 +3,7 @@ import "./player.scss";
 import { getRequestHeaders } from '../../services/utils';
 import parse from 'html-react-parser';
 import moment from "moment";
-import env from '../../assets/env.json';
+import { getEnv } from '../../services/utils';
 
 const Player = (props) => {
     const [video, setVideo] = useState(null);
@@ -12,18 +12,22 @@ const Player = (props) => {
 
     useEffect(() => {
         let controller = new AbortController();
-        fetch(`${env.VITE_API_URL}/mk/videos/video/${props.videoId}`, {
-            signal: controller.signal,
-            headers: getRequestHeaders()
-        })
-        .then(response => {
-            if (response.status === 404) {
-
-            } else {
-                return response.json()
-            }
-        })
-        .then(response => {setVideo(response.data);});
+        (async ()=>{
+            const env = await getEnv();
+            fetch(`${env.VITE_API_URL}/mk/videos/video/${props.videoId}`, {
+                signal: controller.signal,
+                headers: getRequestHeaders(env)
+            })
+            .then(response => {
+                if (response.status === 404) {
+    
+                } else {
+                    return response.json()
+                }
+            })
+            .then(response => {setVideo(response.data);});
+        })();
+        
 
         return () => {
             controller.abort;
