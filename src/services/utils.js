@@ -1,4 +1,3 @@
-import env from '../assets/env.json';
 const STORAGE_NAME = "mk";
 
 export const getEnv = async () => {
