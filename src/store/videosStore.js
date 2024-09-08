@@ -1,6 +1,5 @@
 import {create} from "zustand";
-import { getRequestHeaders } from "../services/utils";
-import { getEnv } from "../services/utils";
+import { getRequestHeaders, getEnv } from "../services/utils";
 
 const useVideosStore = create((set, get) => ({
     videos: [],

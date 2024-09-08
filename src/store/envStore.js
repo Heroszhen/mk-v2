@@ -1,14 +1,26 @@
+import {create} from "zustand";
+
 const useEnvStore = create((set, get) => ({
     env: null,
-    fetchEnv: async () => {
-        try {
-            let response = await fetch('/env.json');
-            response = await response.json();
-            set((state) => ({env: response}));
-            return response;
-        } catch (err) {
-            console.log(err);
-        }
-    }
+    created: null
 }));
 export default useEnvStore;
+
+export const getEnvFromStore = async () => {
+    if (useEnvStore.getState().env !== null) {
+        const now = new Date();console.log(now, useEnvStore.getState(), now - useEnvStore.getState().created > 3600000)
+        if (now - useEnvStore.getState().created < 3600000)return useEnvStore.getState().env;
+    }
+    return await fetchEnv();
+}
+
+export const fetchEnv = async () => {
+    try {
+        let response = await fetch('/env.json');
+        response = await response.json();
+        useEnvStore.setState((state) => ({env: response, created: new Date()}))
+        return response;
+    } catch (err) {
+        console.log(err);
+    }
+}

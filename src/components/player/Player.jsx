@@ -1,9 +1,8 @@
 import React, {useEffect, useState, useRef} from 'react';
 import "./player.scss";
-import { getRequestHeaders } from '../../services/utils';
+import { getRequestHeaders, getEnv, copyToClipboard } from '../../services/utils';
 import parse from 'html-react-parser';
 import moment from "moment";
-import { getEnv, copyToClipboard } from '../../services/utils';
 import { Tooltip } from 'react-tooltip'
 import { useLocation } from 'react-router-dom';
 

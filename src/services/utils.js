@@ -1,11 +1,9 @@
-import useEnvStore from "../store/envStore";
+import { getEnvFromStore } from "../store/envStore";
 
-const {env, fetchEnv} = useEnvStore();
 const STORAGE_NAME = "mk";
 
 export const getEnv = async () => {
-    if (env !== null)return env;
-    return await fetchEnv();
+    return await getEnvFromStore();
 }
 
 export const getRequestHeaders = (options) => {

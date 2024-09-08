@@ -1,6 +1,5 @@
 import {create} from "zustand";
-import { getRequestHeaders } from "../services/utils";
-import { getEnv } from "../services/utils";
+import { getRequestHeaders, getEnv } from "../services/utils";
 
 const useHomeStore = create((set, get) => ({
     photos: [[],[],[]],
