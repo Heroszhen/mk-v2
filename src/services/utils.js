@@ -1,13 +1,11 @@
+import useEnvStore from "../store/envStore";
+
+const {env, fetchEnv} = useEnvStore();
 const STORAGE_NAME = "mk";
 
 export const getEnv = async () => {
-    try {
-        let response = await fetch('/env.json');
-        response = await response.json();
-        return response;
-    } catch (err) {
-        console.log(err);
-    }
+    if (env !== null)return env;
+    return await fetchEnv();
 }
 
 export const getRequestHeaders = (options) => {
@@ -27,6 +25,24 @@ export const getPhotoDimensions = (url) => {
     });
 }
 
+export async function copyToClipboard(value) {
+    let input = document.createElement("input");
+    document.body.appendChild(input);
+    input.value = value;
+    input.focus();
+    input.select();
+    document.execCommand('copy');
+    input.parentNode.removeChild(input);
+    alert("Copié");
+
+    //new API
+    // try {
+    //     await navigator.clipboard.writeText(text);
+    //     console.log('Content copied to clipboard');
+    // } catch (err) {
+    //     console.error('Failed to copy: ', err);
+    // }
+}
 
 // export const setStorage = (key, value) => {
 //     let ob = localStorage.getItem(STORAGE_NAME) ?? {};

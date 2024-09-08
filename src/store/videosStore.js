@@ -23,7 +23,7 @@ const useVideosStore = create((set, get) => ({
         }));
 
         const env = await getEnv();
-        fetch(`${env.VITE_API_URL}/mk/videos/search?key=${keywords}&page=${get().page}`, {
+        fetch(`${env.VITE_API_URL}/videos/search?key=${keywords}&page=${get().page}`, {
             signal: get().abortController.signal,
             headers: getRequestHeaders(env)
         })

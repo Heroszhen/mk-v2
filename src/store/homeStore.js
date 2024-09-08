@@ -9,7 +9,7 @@ const useHomeStore = create((set, get) => ({
         const env = await getEnv();
         for (let i = 0; i <= 2; i++) {
             if (get().photos[i].length === 0) {
-                fetch(`${env.VITE_API_URL}/mk/photos_by_page?page=${i + 1}`, {
+                fetch(`${env.VITE_API_URL}/photos_by_page?page=${i + 1}`, {
                     headers: getRequestHeaders(env)
                 })
                 .then(response => response.json())
@@ -24,7 +24,7 @@ const useHomeStore = create((set, get) => ({
     getVideos: async () => {
         const env = await getEnv();
         if (get().videos.length === 0) {
-            fetch(`${env.VITE_API_URL}/mk/videos/new?result=6`, {
+            fetch(`${env.VITE_API_URL}/videos/new?result=6`, {
                 headers: getRequestHeaders(env)
             })
             .then(response => response.json())

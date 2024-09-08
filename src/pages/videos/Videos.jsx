@@ -57,7 +57,7 @@ const Videos = (props) => {
                         current={currentPage}
                         total={Math.ceil(total / itemsByPage)}
                         onPageChange={setCurrentPage}
-                        maxWidth={'500'}
+                        maxWidth={400}
                     />
                 </div>
             </section>
