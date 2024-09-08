@@ -1,7 +1,7 @@
 import 'bootstrap-icons/font/bootstrap-icons.css' ;
 import './App.scss'
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import Home from './pages/home/Home.jsx';
 import Videos from './pages/videos/Videos.jsx';
@@ -14,6 +14,11 @@ import Footer from './components/footer/Footer.jsx';
 function App() {
   const navRef = useRef(null);
   const navigate = useNavigate();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  window.addEventListener("resize", (e)=>{
+    setWindowWidth(window.innerWidth);
+  });
 
   return (
     <>
@@ -25,7 +30,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/videos" element={<Videos />} />
         <Route path="/video/:id" element={<Video />} />
-        <Route path="/photos" element={<Photos />} />
+        <Route path="/photos" element={<Photos windowWidth={windowWidth} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <div id="history-router-back" className='btn-vouge' onClick={()=>navigate(-1)}>

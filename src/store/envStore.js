@@ -8,7 +8,7 @@ export default useEnvStore;
 
 export const getEnvFromStore = async () => {
     if (useEnvStore.getState().env !== null) {
-        const now = new Date();console.log(now, useEnvStore.getState(), now - useEnvStore.getState().created > 3600000)
+        const now = new Date();
         if (now - useEnvStore.getState().created < 3600000)return useEnvStore.getState().env;
     }
     return await fetchEnv();
