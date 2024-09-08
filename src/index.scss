@@ -92,3 +92,19 @@ background-image: linear-gradient(45deg, var(--main-text-color) 100%, var(--main
 .pointer {
     cursor: pointer;
 }
+
+/*paginator*/
+.pagination {
+    .page-item {
+        .page-link {
+            color: $mainTextColor !important;
+        }
+        &.active {
+            .page-link {
+                color: white !important;
+                background-color: $mainTextColor !important;
+                border-color: $mainTextColor !important;
+            }
+        }
+    }
+}
