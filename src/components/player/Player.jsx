@@ -53,8 +53,9 @@ const Player = (props) => {
     }
 
     const getShortvideoSrc = (url) => {
+        let tab = url.split("/");
         let src = url + "?rel=0&autoplay=1&controls=0&loop=1";
-        src += "&playlist=" + video.video_id;
+        src += "&playlist=" + tab[tab.length - 1];
         return src;
     }
 
@@ -132,13 +133,12 @@ const Player = (props) => {
                             <iframe
                                 width="352"
                                 height="626"
-                                src={getShortvideoSrc()}
+                                src={getShortvideoSrc(video.videourl)}
                                 title=""
-                                frameborder="0"
+                                frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                autoplay
+                                autoPlay
                                 allowFullScreen
-                                style="width:352px;height:621px;border-radius:12px;"
                             />
                         }
                     </div>

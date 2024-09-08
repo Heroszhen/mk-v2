@@ -24,6 +24,14 @@
                     height: 800px !important;
                 }
             }
+            &[data-video-type="5"] {
+                height: 625px !important;
+                iframe {
+                    width: 352px;
+                    height: 621px;
+                    border-radius: 12px;
+                }
+            }
         }
         .video-description {
             margin: 15px;
