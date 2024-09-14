@@ -2,3 +2,7 @@
 https://preview.themeforest.net/item/vouge-fashion-store-woocommerce-theme/full_screen_preview/53600687?_ga=2.56498543.513827455.1723382418-236884057.1723382418
 
 https://vouge.wpengine.com/landing-page/
+
+
+---pwa
+https://www.saurabhmisra.dev/setup-react-pwa-using-vite/

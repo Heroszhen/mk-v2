@@ -21,6 +21,7 @@ $navWidth: 260px;
         border-bottom : 1px solid rgb(19, 19, 19);
         height: 42px;
         @include flex(end, center);
+        cursor: pointer;
     }
     #wrap-close-nav {
         font-size:25px;
