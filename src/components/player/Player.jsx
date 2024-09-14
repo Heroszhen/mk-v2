@@ -155,7 +155,7 @@ const Player = (props) => {
                             className="wrap" 
                             data-tooltip-id="lien-tooltip" data-tooltip-content="Lien" 
                             data-tooltip-place="bottom" 
-                            onClick={()=>copyToClipboard(`${window.location.protocol}//${window.location.hostname}${window.location.port === '' ? '/' : ':' + window.location.port}${location.pathname}`)}
+                            onClick={()=>copyToClipboard(`${window.location.protocol}//${window.location.hostname}${window.location.port === '' ? '' : ':' + window.location.port}${location.pathname}`)}
                         >
                             <i className="bi bi-link-45deg"></i>
                         </div>

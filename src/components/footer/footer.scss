@@ -19,9 +19,21 @@
             left: 50px;
             color: $mainTextColor;
         }
-        @for $i from 1 through 4 {
+        @for $i from 1 through 5 {
             .link:nth-child(#{$i}) {
               top: $i * 60px;
+            }
+        }
+        .wrap-input {
+            input {
+                border:none;
+                outline: none;
+                background-color: transparent;
+                &:focus {
+                    border:none;
+                    outline: none;
+                    caret-color: transparent;
+                }
             }
         }
     }

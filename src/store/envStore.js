@@ -24,3 +24,11 @@ export const fetchEnv = async () => {
         console.log(err);
     }
 }
+
+export const setAction = (newStatus) => {
+    if (useEnvStore.getState().env === null) return;
+
+    let newEnv = useEnvStore.getState().env;
+    newEnv.VITE_ACTION_STATUS = newStatus;
+    useEnvStore.setState((state) => ({env: newEnv, created: new Date()}));
+}
