@@ -12,6 +12,7 @@ import Video from './pages/video/Video.jsx';
 import NotFound from './pages/notfound/NotFound.jsx';
 import Footer from './components/footer/Footer.jsx';
 import OnePhoto from './pages/onephoto/OnePhoto.jsx';
+import Contact from './pages/contact/contact.jsx';
 
 function App() {
   const navRef = useRef(null);
@@ -45,6 +46,7 @@ function App() {
         <Route path="/video/:id" element={<Video />} />
         <Route path="/photos" element={<Photos windowWidth={windowWidth} />} />
         <Route path="/photo/:id" element={<OnePhoto />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {display===true &&

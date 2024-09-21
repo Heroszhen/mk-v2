@@ -80,7 +80,7 @@ const Player = (props) => {
             video.style.width = video.dataset.width + "px";
             video.style.height = video.dataset.height + "px";
         }
-        videoRect = video.getBoundingClientRect();console.log(videoRect)
+        videoRect = video.getBoundingClientRect();console.log(wrapRect)
         if (videoRect.top > 0) {
             video.style.marginTop = `-${videoRect.top}px`;
         } else {

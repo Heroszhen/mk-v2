@@ -13,6 +13,9 @@
                 width: 100%;
                 height: 100%;
             }
+            &[data-video-type="1"] {
+                @include flex();
+            }
             &[data-video-type="2"]:has(>#iframe-open-douyin) {
                 height: 720px !important;
                 iframe {
