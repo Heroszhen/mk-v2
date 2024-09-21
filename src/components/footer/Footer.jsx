@@ -2,6 +2,7 @@ import React from 'react';
 import './footer.scss';
 import { Link } from 'react-router-dom';
 import { setAction } from '../../store/envStore';
+import photo from '../../assets/look_good_enough_to_eat.png';
 
 const Footer = (props) => {
     const setActionStatus = (e) => {
@@ -21,9 +22,10 @@ const Footer = (props) => {
                     <input onKeyUp={(e)=>setActionStatus(e)}/>
                 </div>
             </section>
-            <section>
+            <section id="good-enough-to-eat">
                 <a href="https://www.facebook.com/LearningEnglishAmericanWay/posts/1206792596185259/?paipv=0&eav=AfZxQPx8dKyreuvQi3H9B5Zh0gY-mqYCTSNYf2IxH-GqpF8Ez1vF373VSBu5GhEuviQ&_rdr" target='__blank'>
                     秀色可餐
+                    <img src={photo} alt="" />
                 </a>
             </section>
             <section className='text-center'>

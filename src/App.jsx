@@ -2,6 +2,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css' ;
 import './App.scss'
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useRef, useState, useEffect } from 'react';
+import loaderPhoto from './assets/amanda_cerny _dance.gif';
 
 import Home from './pages/home/Home.jsx';
 import Videos from './pages/videos/Videos.jsx';
@@ -54,6 +55,10 @@ function App() {
       {display===true &&
         <Footer />
       }
+
+      <div id="loader" className="d-none">
+        <img src={loaderPhoto} alt="" />
+      </div>
     </>
   )
 }

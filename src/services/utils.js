@@ -42,6 +42,15 @@ export async function copyToClipboard(value) {
     // }
 }
 
+export const toggleLoader = (open = true) => {
+    const loader = document.getElementById('loader');
+    if (open) {
+        loader.classList.remove('d-none');
+    } else {
+        loader.classList.add('d-none');
+    }
+}
+
 // export const setStorage = (key, value) => {
 //     let ob = localStorage.getItem(STORAGE_NAME) ?? {};
 //     ob = JSON.parse(ob);

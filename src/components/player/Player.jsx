@@ -69,7 +69,6 @@ const Player = (props) => {
             video.dataset.height = parseInt(videoRect.height);
         }
 
-        console.log(wrapRect, videoRect)
         let angle = video.dataset.angle === undefined ? 0 : parseInt(video.dataset.angle);
         angle = angle === 360 ? 90 : angle + 90;
         video.style.transform = "rotate(" + angle + "deg)";

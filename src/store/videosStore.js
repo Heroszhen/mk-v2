@@ -1,5 +1,5 @@
 import {create} from "zustand";
-import { getRequestHeaders, getEnv } from "../services/utils";
+import { getRequestHeaders, getEnv, toggleLoader } from "../services/utils";
 
 const useVideosStore = create((set, get) => ({
     videos: [],
@@ -12,6 +12,8 @@ const useVideosStore = create((set, get) => ({
     setPage: (page) => {set((state) => ({page: page}))},
     resetVideos: () => {set((state) => ({videos: []}))},
     searchVideos: async (keywords, page) => {
+        toggleLoader();
+
         if (get().abortController !== null)get().abortController.abort;
 
         set((state) => ({
@@ -36,7 +38,8 @@ const useVideosStore = create((set, get) => ({
                 itemsByPage: response.itemsByPage,
                 total: response.total,
             }));
-        });
+            toggleLoader(false);
+        }).catch(e => toggleLoader(false));
     }
 }));
 export default useVideosStore;

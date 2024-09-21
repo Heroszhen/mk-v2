@@ -14,6 +14,18 @@ const Photos = (props) => {
     const [columnsCount, setColumnsCount] = useState(props.windowWidth > 767 ? 5 : 2);
 
     useEffect(() => {
+        let unSubscriber = usePhotosStore.subscribe(
+            (state, pre) => {
+                //console.log(pre, state);
+            }
+        );
+        
+        return () => {
+            unSubscriber();
+        }
+    }, []);
+
+    useEffect(() => {
         if (props.windowWidth > 992) {
             setColumnsCount(5);
         } else if (props.windowWidth > 767) {

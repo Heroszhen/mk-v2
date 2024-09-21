@@ -1,5 +1,5 @@
 import {create} from "zustand";
-import { getRequestHeaders, getEnv } from "../services/utils";
+import { getRequestHeaders, getEnv, toggleLoader } from "../services/utils";
 
 const usePhotosStore = create((set, get) => ({
     photos: [],
@@ -9,6 +9,8 @@ const usePhotosStore = create((set, get) => ({
     total: 0,
     abortController: null,
     searchPhotos: async (keywords, page) => {
+        toggleLoader();
+
         if (get().abortController !== null)get().abortController.abort;
 
         set((state) => ({
@@ -33,7 +35,9 @@ const usePhotosStore = create((set, get) => ({
                 itemsByPage: response.itemsByPage,
                 total: response.total,
             }));
-        });
+
+            toggleLoader(false)
+        }).catch(e => toggleLoader(false));
     }
 }));
 export default usePhotosStore;

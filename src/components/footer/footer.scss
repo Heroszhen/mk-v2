@@ -47,8 +47,21 @@
         margin-right: 40px;
         a {
             color: white;
+            text-align: center;
+            display: inline;
+            position: relative;
+            img {
+                position: absolute;
+                width: 400px !important;
+                left: calc(100% / 2 - 200px);
+                top: 230px;
+                display:none;
+            }
             &:hover {
                 text-decoration: underline !important;
+            }
+            &:hover  img {
+                display: block;
             }
         }
     }
