@@ -19,7 +19,7 @@ const Footer = (props) => {
                 <a href="https://joliesfilles.yangzhen.tech/" className="link btn-vouge mb-4" target='__blank'>Site Lié</a>
                 <a href="https://alexandra-daddario.yangzhen.tech/" className="link btn-vouge mb-4" target='__blank'>alexandra-daddario</a>
                 <div className='link wrap-input'>
-                    <input onKeyUp={(e)=>setActionStatus(e)}/>
+                    <input type="text" id="input-action-status" onKeyUp={(e)=>setActionStatus(e)}/>
                 </div>
             </section>
             <section id="good-enough-to-eat">
