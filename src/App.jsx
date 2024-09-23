@@ -28,6 +28,7 @@ function App() {
   useEffect(() => {
     if (reactLocation.pathname.includes('/photo/') === true)setDisplay(false);
     else setDisplay(true);
+    navRef.current.classList.remove('open');
  }, [reactLocation]);
 
   return (
