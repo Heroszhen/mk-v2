@@ -1,0 +1,21 @@
+.video-related {
+    display: flex;
+    width: 100%;
+    color: black;
+    margin-bottom: 10px;
+    padding: 5px;
+    cursor: pointer;
+    &:hover {
+        background-color: gainsboro;
+    }
+    img {
+        width: 150px;
+    }
+    .description {
+        padding-left: 5px;
+        width: calc(100% - 150px);
+        .title {
+            font-size: 20px;
+        }
+    }
+}

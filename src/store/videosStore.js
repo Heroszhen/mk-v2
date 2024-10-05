@@ -9,6 +9,7 @@ const useVideosStore = create((set, get) => ({
     total: 0,
     canSearch: true,
     abortController: null,
+    relatedVideos: [],
     setPage: (page) => {set((state) => ({page: page}))},
     resetVideos: () => {set((state) => ({videos: []}))},
     searchVideos: async (keywords, page) => {
@@ -43,3 +44,23 @@ const useVideosStore = create((set, get) => ({
     }
 }));
 export default useVideosStore;
+
+export const getRelatedVideos = async (videoId) => {
+    if (useVideosStore.getState().abortController !== null)useVideosStore.getState().abortController.abort;
+    useVideosStore.setState((state) => ({
+        relatedVideos: [],
+        abortController: new AbortController(),
+    }));
+
+    const env = await getEnv();
+    fetch(`${env.VITE_API_URL}/videos/video/${videoId}/related`, {
+        signal: useVideosStore.getState().abortController.signal,
+        headers: getRequestHeaders(env)
+    })
+    .then(response => {
+        if (response.status !== 404) {
+            return response.json()
+        }
+    })
+    .then(response => {useVideosStore.setState((state) => ({relatedVideos: response.data}));});
+}

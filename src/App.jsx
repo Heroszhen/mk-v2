@@ -3,6 +3,7 @@ import './App.scss'
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useRef, useState, useEffect } from 'react';
 import loaderPhoto from './assets/amanda_cerny _dance.gif';
+import { getRelatedVideos } from './store/videosStore.js';
 
 import Home from './pages/home/Home.jsx';
 import Videos from './pages/videos/Videos.jsx';

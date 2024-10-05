@@ -51,6 +51,19 @@ export const toggleLoader = (open = true) => {
     }
 }
 
+/**
+ * 
+ * @param {number} [seconds=1] seconds 
+ * @returns {Promise<number>}
+ */
+export const wait = (seconds = 1) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(1);
+        }, seconds * 1000);
+    });
+}
+
 // export const setStorage = (key, value) => {
 //     let ob = localStorage.getItem(STORAGE_NAME) ?? {};
 //     ob = JSON.parse(ob);

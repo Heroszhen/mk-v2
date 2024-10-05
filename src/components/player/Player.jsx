@@ -34,7 +34,7 @@ const Player = (props) => {
         return () => {
             controller.abort;
         }
-    }, []);
+    }, [props.videoId]);
 
     const checkVideoType2 = (videoUrl) => {
         if (videoUrl.includes('amazon') || videoUrl.includes('aweme'))return 'video';
@@ -80,7 +80,7 @@ const Player = (props) => {
             video.style.width = video.dataset.width + "px";
             video.style.height = video.dataset.height + "px";
         }
-        videoRect = video.getBoundingClientRect();console.log(wrapRect)
+        videoRect = video.getBoundingClientRect();
         if (videoRect.top > 0) {
             video.style.marginTop = `-${videoRect.top}px`;
         } else {
