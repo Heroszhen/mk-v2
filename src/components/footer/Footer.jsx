@@ -15,7 +15,7 @@ const Footer = (props) => {
         <footer id="footer">
             <section>
                 <Link to="/contact" className="link btn-vouge mb-4">Contact</Link>
-                <a href="http://notes3wa.yangzhen.fr/portfolio" target='__blank' className="link btn-vouge mb-4">Qui est zhen?</a>
+                <a href="https://www.yangzhen.fr/" target='__blank' className="link btn-vouge mb-4">Qui est zhen?</a>
                 <a href="https://joliesfilles.yangzhen.tech/" className="link btn-vouge mb-4" target='__blank'>Site Lié</a>
                 <a href="https://alexandra-daddario.yangzhen.tech/" className="link btn-vouge mb-4" target='__blank'>alexandra-daddario</a>
                 <div className='link wrap-input'>
