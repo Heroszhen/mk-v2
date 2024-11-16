@@ -9,8 +9,8 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Jolies Filles',
-        short_name: 'JoliesFilles',
+        name: 'MK',
+        short_name: 'MK',
         description: 'Vive les jolies filles',
         theme_color: "#060716",
         background_color: "#060716",
