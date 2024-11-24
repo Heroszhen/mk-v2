@@ -47,7 +47,7 @@ const Nav = forwardRef((props, ref) => {
             <Link to="/" className="route item">Accueil</Link>
             <Link to="/videos" className="route item">Vidéos</Link>
             <Link to="/photos" className="route item">Photos</Link>
-            <Link className="route item">Actrices</Link>
+            <Link to="/actrices" className="route item">Actrices</Link>
             {/* {isInstallable && ( */}
                 <div onClick={handleInstallClick} className="route item">Installer</div>
             {/* )} */}

@@ -1,0 +1,50 @@
+@import '../../styles/variables.scss';
+@import '../../styles/utils.scss';
+
+#actresses {
+    > .title {
+        padding: 10px 5px;
+        background-color: $mainBgColor2;
+        color: white;
+    }
+    #list-actresses {
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+    }
+    article.actress {
+        @include flex(flex-start, flex-start);
+        margin-bottom: 20px;
+        background-color: white;
+        padding: 10px;
+        transition: .5s;
+        cursor: pointer;
+        &.active, &:hover {
+            box-shadow: 0px 4px 5px -3px rgba(0,0,0,0.74);
+        }
+        .wrap-photo {
+            width: 150px;
+        }
+        .wrap-info {
+            padding-left: 20px;
+            width: calc(100% - 150px);
+            .description {
+                overflow: hidden;
+                word-wrap: break-word;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                text-overflow: ellipsis;
+            }
+            .detail {
+                display: flex;
+                align-items: center;
+                &:hover {
+                    color: #0996ff;
+                }
+                .bi-chevron-double-right {
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+}
