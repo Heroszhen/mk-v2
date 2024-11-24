@@ -14,7 +14,7 @@ const Search = (props) => {
     return (
         <section id="search" >
             <form className="wrap" onSubmit={(e) => sendKeywords(e)}>
-                <input type="text" id="input-search-bar" ref={inputRef} defaultValue={props.keywords} />
+                <input type="search" id="input-search-bar" ref={inputRef} defaultValue={props.keywords} />
                 <div 
                     className='wrap-icon' 
                     onClick={(e) => sendKeywords(e)}
