@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { registerSW } from 'virtual:pwa-register';
+import 'virtual:uno.css';
 
 createRoot(document.getElementById('root')).render(
   // <StrictMode>

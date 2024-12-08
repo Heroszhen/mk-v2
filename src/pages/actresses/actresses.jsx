@@ -14,7 +14,7 @@ console.log(actresses)
     return (
         <>
             <section id="actresses" data-page="main">
-                <section className="title h2 text-center">沉鱼落雁，闭月羞花</section>
+                <section className="title text-30 text-center">沉鱼落雁，闭月羞花</section>
                 <section className="container mt-4">
                     <div className="row">
                         <section className="col-md-9 scrollbar" id="list-actresses">
