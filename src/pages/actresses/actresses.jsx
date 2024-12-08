@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './actresses.scss';
 import useActressesStore, {getActresses} from '../../store/actressesStore';
 import parse from 'html-react-parser';
@@ -6,10 +6,21 @@ import parse from 'html-react-parser';
 const Actresses = (props) => {
     const [actressIndex, setActressIndex] = useState(0);
     const {actresses} = useActressesStore();
-console.log(actresses)
+    const listRef = useRef([]);
+
     useEffect(() => {
         getActresses();
     }, []);
+
+    useEffect(() => {
+        listRef.current.forEach(item => item?.classList.remove('active'));
+        listRef.current[0]?.classList.add('active');
+    }, [actressIndex]);
+
+    const changeActress = (index) => {
+        listRef.current = [];
+        setActressIndex(index)
+    }
 
     return (
         <>
@@ -21,7 +32,7 @@ console.log(actresses)
                             {
                                 actresses.map((actress, key) => {
                                     return (
-                                        <article className='actress' key={key} onClick={()=>setActressIndex(key)}>
+                                        <article className='actress' key={key} onClick={()=>changeActress(key)}>
                                             <div className="wrap-photo">
                                                 <img src={actress.photourl} alt="" />
                                             </div>
@@ -45,26 +56,30 @@ console.log(actresses)
                         <section className="col-md-3">
                             {actresses.length > 0 &&
                                 <div id="carouselExample" className="carousel slide">
-                                <div className="carousel-inner">
-                                    {
-                                        actresses[actressIndex].mkphotos.map((photo, key) => {
-                                            return (
-                                            <div className={key===0 ? "carousel-item active" : 'carousel-item'} key={key}>
-                                                <img src={photo.photourl} className="d-block w-100" alt="..." />
-                                            </div>
-                                            );
-                                        })
+                                    <div className="carousel-inner">
+                                        {
+                                            actresses[actressIndex].mkphotos.map((photo, key) => {
+                                                return (
+                                                    <div 
+                                                        className={key===0 ? "carousel-item active" : 'carousel-item'} 
+                                                        key={key}
+                                                        ref={(el) => (listRef.current[key] = el)}
+                                                    >
+                                                        <img src={photo.photourl} className="d-block w-100" alt="..." />
+                                                    </div>
+                                                );
+                                            })
 
-                                    }
-                                </div>
-                                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                  <span className="visually-hidden">Previous</span>
-                                </button>
-                                <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                                  <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                  <span className="visually-hidden">Next</span>
-                                </button>
+                                        }
+                                    </div>
+                                    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span className="visually-hidden">Previous</span>
+                                    </button>
+                                    <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span className="visually-hidden">Next</span>
+                                    </button>
                               </div>
                             }
                         </section>
