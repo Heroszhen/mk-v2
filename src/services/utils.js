@@ -64,6 +64,11 @@ export const wait = (seconds = 1) => {
     });
 }
 
+export function isMobile() {
+    if (/Mobi|Android|iPhone/i.test(navigator.userAgent))return true;
+    return false;
+}
+
 // export const setStorage = (key, value) => {
 //     let ob = localStorage.getItem(STORAGE_NAME) ?? {};
 //     ob = JSON.parse(ob);

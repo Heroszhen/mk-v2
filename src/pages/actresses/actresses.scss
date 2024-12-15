@@ -2,6 +2,7 @@
 @import '../../styles/utils.scss';
 
 #actresses {
+    position: relative;
     > .title {
         padding: 10px 5px;
         background-color: $mainBgColor2;
