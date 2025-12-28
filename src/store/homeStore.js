@@ -23,7 +23,7 @@ const useHomeStore = create((set, get) => ({
     getVideos: async () => {
         const env = await getEnv();
         if (get().videos.length === 0) {
-            fetch(`${env.VITE_API_URL}/videos/new?result=6`, {
+            fetch(`${env.VITE_API_URL}/videos/new?result=3`, {
                 headers: getRequestHeaders(env)
             })
             .then(response => response.json())

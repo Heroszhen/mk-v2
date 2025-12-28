@@ -8,8 +8,6 @@ const useActressesStore = create((set, get) => ({
 export default useActressesStore;
 
 export const getActresses = async () => {
-    if (useActressesStore.getState().actresses.length > 0) return;
-
     if (useActressesStore.getState().abortController !== null)useActressesStore.getState().abortController.abort;
     useActressesStore.setState((state) => ({
         actresses: [],
@@ -17,7 +15,7 @@ export const getActresses = async () => {
     }));
 
     const env = await getEnv();
-    fetch(`${env.VITE_API_URL_V1}/actresses`, {
+    fetch(`${env.VITE_API_URL}/actresses`, {
         signal: useActressesStore.getState().abortController.signal,
         headers: getRequestHeaders(env)
     })
@@ -26,5 +24,7 @@ export const getActresses = async () => {
             return response.json()
         }
     })
-    .then(response => {useActressesStore.setState((state) => ({actresses: response.allactresses}));});
+    .then(response => {
+        useActressesStore.setState((state) => ({actresses: response.allactresses}));
+    });
 };

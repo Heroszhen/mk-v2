@@ -120,7 +120,7 @@ const Actresses = (props) => {
                                 <div id="carouselExample" className="carousel slide">
                                     <div className="carousel-inner">
                                         {
-                                            actresses[actressIndex].mkphotos.map((photo, key) => {
+                                            actresses[actressIndex]['mkphotos'].map((photo, key) => {
                                                 return (
                                                     <div 
                                                         className={key===0 ? "carousel-item active" : 'carousel-item'} 
