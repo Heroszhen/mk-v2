@@ -1,5 +1,5 @@
 import React from 'react';
-import './notfound.scss';7
+import './notfound.scss';
 import photo from '../../assets/notfound.gif';
 
 const NotFound = (props) => {

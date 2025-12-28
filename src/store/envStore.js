@@ -16,7 +16,7 @@ export const getEnvFromStore = async () => {
 
 export const fetchEnv = async () => {
     try {
-        let response = await fetch('/env.json');
+        let response = await fetch('/env.local.json');
         response = await response.json();
         useEnvStore.setState((state) => ({env: response, created: new Date()}))
         return response;

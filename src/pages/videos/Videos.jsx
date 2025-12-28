@@ -18,10 +18,6 @@ const Videos = (props) => {
     }
 
     useEffect(() => {
-    
-    }, []);
-
-    useEffect(() => {
         if (enter === true) {
             setEnter(false);
             if (videos.length === 0)searchVideos(keywords, currentPage);

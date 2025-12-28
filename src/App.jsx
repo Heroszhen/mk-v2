@@ -1,20 +1,12 @@
 import 'bootstrap-icons/font/bootstrap-icons.css' ;
 import './App.scss'
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useRef, useState, useEffect } from 'react';
 import loaderPhoto from './assets/amanda_cerny _dance.gif';
-import { getRelatedVideos } from './store/videosStore.js';
+import RoutesWrapper from './routes/RoutesWrapper';
 
-import Home from './pages/home/Home.jsx';
-import Videos from './pages/videos/Videos.jsx';
-import Photos from './pages/photos/Photos.jsx';
 import Nav from './components/nav/Nav.jsx';
-import Video from './pages/video/Video.jsx';
-import NotFound from './pages/notfound/NotFound.jsx';
 import Footer from './components/footer/Footer.jsx';
-import OnePhoto from './pages/onephoto/OnePhoto.jsx';
-import Contact from './pages/contact/contact.jsx';
-import Actresses from './pages/actresses/actresses.jsx';
 
 function App() {
   const navRef = useRef(null);
@@ -28,10 +20,18 @@ function App() {
   });
 
   useEffect(() => {
+    if ('1' === import.meta.env.VITE_MAINTENANCE
+      && !reactLocation.pathname.includes('maintenance')
+    ) {
+      navigate('/maintenance');
+    }
+  }, []);
+
+  useEffect(() => {
     if (reactLocation.pathname.includes('/photo/') === true)setDisplay(false);
     else setDisplay(true);
     navRef.current.classList.remove('open');
- }, [reactLocation]);
+  }, [reactLocation]);
 
   return (
     <>
@@ -43,16 +43,7 @@ function App() {
       {display===true &&
         <Nav ref={navRef} />
       }
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/videos" element={<Videos />} />
-        <Route path="/video/:id" element={<Video />} />
-        <Route path="/photos" element={<Photos windowWidth={windowWidth} />} />
-        <Route path="/photo/:id" element={<OnePhoto />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/actrices" element={<Actresses />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <RoutesWrapper windowWidth={windowWidth} />
       {display===true &&
         <div id="history-router-back" className='btn-vouge' onClick={()=>navigate(-1)}>
           <i className="bi bi-arrow-left"></i>
