@@ -36,6 +36,12 @@ const Player = (props) => {
         }
     }, [props.videoId]);
 
+    useEffect(() => {
+        if (video !== null && video.videotype === 6) {
+            window.instgrm?.Embeds.process();
+        }
+    }, [video]);
+
     const checkVideoType2 = (videoUrl) => {
         if (videoUrl.includes('amazon') || videoUrl.includes('aweme'))return 'video';
         if (videoUrl.includes('douyin'))return 'iframe';
@@ -86,6 +92,12 @@ const Player = (props) => {
         } else {
             video.style.marginTop = `0px`;
         }
+    }
+
+    const reloadPlayer = () => {
+        const oldVideo = video;
+        setVideo(null);
+        setTimeout(() => setVideo(oldVideo), 1000);
     }
 
     return (
@@ -140,6 +152,7 @@ const Player = (props) => {
                                 allowFullScreen
                             />
                         }
+                        {video.videotype === 6 && parse(video.videourl)}
                     </div>
                     <div className='fst-italic p-2 text-black-50 text-center'>
                         Si la vidéo ne s'affiche pas, aller sur le site d'origine
@@ -169,6 +182,16 @@ const Player = (props) => {
                             <i className="bi bi-arrow-counterclockwise"></i>
                         </div>
                         <Tooltip id="rotate-tooltip" />
+
+                        <div
+                            data-tooltip-id="reload-tooltip" data-tooltip-content="Recharger" 
+                            data-tooltip-place="bottom"
+                            className="wrap"
+                            onClick={() => reloadPlayer()}
+                        >
+                            <i className="bi bi-arrow-clockwise"></i>
+                        </div>
+                        <Tooltip id="reload-tooltip" />
                     </div>
                     <div className="video-title fw-bold pt-1 ps-3 pe-3 fs-4">
                         {video.name}

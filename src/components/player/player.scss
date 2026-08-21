@@ -35,6 +35,16 @@
                     border-radius: 12px;
                 }
             }
+            &[data-video-type="6"] {
+                height: 673px !important;
+                iframe {
+                    position: relative;
+                    margin: 0 auto !important;
+                    margin-top: -55px !important;
+                    height: 729px;
+                    border: none !important;
+                }
+            }
         }
         .video-description {
             margin: 15px;
