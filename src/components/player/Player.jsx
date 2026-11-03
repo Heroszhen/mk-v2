@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 import "./player.scss";
-import { getRequestHeaders, getEnv, copyToClipboard } from '../../services/utils';
+import { getRequestHeaders, getEnv, copyToClipboard, wait } from '../../services/utils';
 import parse from 'html-react-parser';
 import moment from "moment";
 import { Tooltip } from 'react-tooltip'
@@ -9,31 +9,20 @@ import { useLocation } from 'react-router-dom';
 const Player = (props) => {
     const [video, setVideo] = useState(null);
     const location = useLocation();
-    const wrapVideoRef = useRef();
+    //const wrapVideoRef = useRef();
     window.scrollTo(0, 0);
+    const [env, setEnv] = useState(null);
+    const iframeRef = useRef(null)
 
     useEffect(() => {
-        let controller = new AbortController();
-        (async ()=>{
-            const env = await getEnv();
-            fetch(`${env.VITE_API_URL}/videos/video/${props.videoId}`, {
-                signal: controller.signal,
-                headers: getRequestHeaders(env)
-            })
-            .then(response => {
-                if (response.status === 404) {
-    
-                } else {
-                    return response.json()
-                }
-            })
-            .then(response => {setVideo(response.data);});
-        })();
-        
+        return () => window.removeEventListener('message', resizeIframe);
+    }, []);
 
-        return () => {
-            controller.abort;
-        }
+
+    useEffect(() => {
+        (async ()=>{
+            setEnv(await getEnv());
+        })();
     }, [props.videoId]);
 
     useEffect(() => {
@@ -42,6 +31,75 @@ const Player = (props) => {
         }
     }, [video]);
 
+    useEffect(() => {
+        if (env !== null) {
+            window.addEventListener('message', resizeIframe);
+            getVideo();
+        }
+    }, [env]);
+
+    const getVideo = async () => {
+        const controller = new AbortController();
+        fetch(`${env.VITE_API_URL}/videos/video/${props.videoId}`, {
+            signal: controller.signal,
+            headers: getRequestHeaders(env)
+        })
+        .then(response => {
+            if (response.status === 404) {
+
+            } else {
+                return response.json()
+            }
+        })
+        .then(async (response) => {
+            setVideo(response.data);
+            const payload = { url: response.data.videourl, height: Math.round(window.innerHeight) };
+            switch (response.data.videotype) {
+                case 1:
+                    payload['type'] = 'integration';
+                    break;
+                case 2:
+                    if (response.data.videourl.includes('douyin')) payload['type'] = 'douyin';
+                    else payload['type'] = 'mp4';
+                    break;
+                case 4:
+                    payload['type'] = 'tiktok';
+                    payload['url'] = response.data.siteurl
+                    break;
+                case 5:
+                    payload['type'] = 'youtube_short';
+                    break;
+                case 6:
+                    payload['type'] = 'instagram';
+                    break;
+                case 7:
+                    payload['type'] = 'dailymotion';
+                    payload['url'] = response.data.siteurl
+                    break;
+            }
+
+            await wait(0.5);
+            iframeRef?.current?.contentWindow.postMessage(
+            { type: 'READY', payload: payload },
+            env['VITE_FRONT_SERVICE']
+            );
+        });
+    }
+
+    const resizeIframe = (event) => {
+        if (!iframeRef?.current) return;
+
+        if (event.origin !== 'http://localhost:4200') return;
+
+        if (event.source !== iframeRef.current.contentWindow) return;
+
+        const data = event.data;
+        if (data?.type === 'RESIZE') {
+            const videoHeight = data.payload.videoHeight + 'px';
+            iframeRef.current.style.height = videoHeight;
+        }
+    }
+/*
     const checkVideoType2 = (videoUrl) => {
         if (videoUrl.includes('amazon') || videoUrl.includes('aweme'))return 'video';
         if (videoUrl.includes('douyin'))return 'iframe';
@@ -93,18 +151,19 @@ const Player = (props) => {
             video.style.marginTop = `0px`;
         }
     }
-
+*/
     const reloadPlayer = () => {
-        const oldVideo = video;
-        setVideo(null);
-        setTimeout(() => setVideo(oldVideo), 1000);
+        window.removeEventListener('message', resizeIframe);
+        const oldEnv = env;
+        setEnv(null);
+        setTimeout(() => setEnv(oldEnv));
     }
 
     return (
         <section id="player-video">
             {video !== null &&
                 <section id="container-video">
-                    <div className='wrap-video' data-video-type={video.videotype} ref={wrapVideoRef}>
+                    {/* <div className='wrap-video' data-video-type={video.videotype} ref={wrapVideoRef}>
                         {(video.videotype===1 || video.videotype == 4) &&
                             parse(video.videourl)
                         }
@@ -153,6 +212,16 @@ const Player = (props) => {
                             />
                         }
                         {video.videotype === 6 && parse(video.videourl)}
+                    </div> */}
+                    <div className='wrap-video'>
+                        {env !== null && 
+                            <iframe 
+                              className="w-full min-h-[200px] border-none block" 
+                              src={env['VITE_FRONT_SERVICE'] + '/video-player'} 
+                              ref={iframeRef}
+                              allowFullScreen
+                            ></iframe>
+                        }
                     </div>
                     <div className='fst-italic p-2 text-black-50 text-center'>
                         Si la vidéo ne s'affiche pas, aller sur le site d'origine

@@ -5,46 +5,45 @@
     min-height: 100vh;
     #container-video {
         .wrap-video {
-            height: 650px;
             overflow: hidden;
             background-color: black;
-            text-align: center;
-            video, iframe, embed {
-                width: 100%;
-                height: 100%;
-            }
-            &[data-video-type="1"] {
-                @include flex();
-            }
-            &[data-video-type="2"]:has(>#iframe-open-douyin) {
-                height: 720px !important;
-                iframe {
-                    width: 324px;
-                }
-            }
-            &[data-video-type="4"] {
-                iframe {
-                    height: 800px !important;
-                }
-            }
-            &[data-video-type="5"] {
-                height: 625px !important;
-                iframe {
-                    width: 352px;
-                    height: 621px;
-                    border-radius: 12px;
-                }
-            }
-            &[data-video-type="6"] {
-                height: 673px !important;
-                iframe {
-                    position: relative;
-                    margin: 0 auto !important;
-                    margin-top: -55px !important;
-                    height: 729px;
-                    border: none !important;
-                }
-            }
+            // text-align: center;
+            // video, iframe, embed {
+            //     width: 100%;
+            //     height: 100%;
+            // }
+            // &[data-video-type="1"] {
+            //     @include flex();
+            // }
+            // &[data-video-type="2"]:has(>#iframe-open-douyin) {
+            //     height: 720px !important;
+            //     iframe {
+            //         width: 324px;
+            //     }
+            // }
+            // &[data-video-type="4"] {
+            //     iframe {
+            //         height: 800px !important;
+            //     }
+            // }
+            // &[data-video-type="5"] {
+            //     height: 625px !important;
+            //     iframe {
+            //         width: 352px;
+            //         height: 621px;
+            //         border-radius: 12px;
+            //     }
+            // }
+            // &[data-video-type="6"] {
+            //     height: 673px !important;
+            //     iframe {
+            //         position: relative;
+            //         margin: 0 auto !important;
+            //         margin-top: -55px !important;
+            //         height: 729px;
+            //         border: none !important;
+            //     }
+            // }
         }
         .video-description {
             margin: 15px;
