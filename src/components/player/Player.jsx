@@ -89,7 +89,7 @@ const Player = (props) => {
     const resizeIframe = (event) => {
         if (!iframeRef?.current) return;
 
-        if (event.origin !== 'http://localhost:4200') return;
+        if (event.origin !== env['VITE_FRONT_SERVICE']) return;
 
         if (event.source !== iframeRef.current.contentWindow) return;
 
